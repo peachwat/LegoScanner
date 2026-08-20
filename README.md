@@ -21,7 +21,7 @@ są do ręcznej weryfikacji przez użytkownika, co zwiększa odporność systemu
 Do uruchomienia projektu wymagane są:
 
 - Android Studio w wersji Ladybug lub nowszej
-- JDK w wersji 21 — Gradle 8.13 nie obsługuje wersji nowszych niż 23
+- JDK w wersji 21 - Gradle 8.13 nie obsługuje wersji nowszych niż 23
 - Android SDK 36
 - urządzenie z systemem Android 7.0 (API 24) lub nowszym albo emulator
 
@@ -51,17 +51,17 @@ ROBOFLOW_API_KEY=
 ROBOFLOW_MODEL_ID=
 ```
 
-**`sdk.dir`** — ścieżka do Android SDK. Można ją odczytać w oknie
+**`sdk.dir`** - ścieżka do Android SDK. Można ją odczytać w oknie
 File → Settings → Languages & Frameworks → Android SDK. Format wymaga podwójnych
 ukośników odwrotnych oraz znaku `\:` po literze dysku.
 
-**`REBRICKABLE_API_KEY`** — klucz dostępu do API Rebrickable, generowany po założeniu
+**`REBRICKABLE_API_KEY`** - klucz dostępu do API Rebrickable, generowany po założeniu
 bezpłatnego konta pod adresem https://rebrickable.com/api/
 
-**`ROBOFLOW_API_KEY`** — klucz dostępu do usługi Roboflow, dostępny pod adresem
+**`ROBOFLOW_API_KEY`** - klucz dostępu do usługi Roboflow, dostępny pod adresem
 https://app.roboflow.com/settings/api
 
-**`ROBOFLOW_MODEL_ID`** — identyfikator modelu detekcji w formacie `nazwa-projektu/wersja`.
+**`ROBOFLOW_MODEL_ID`** - identyfikator modelu detekcji w formacie `nazwa-projektu/wersja`.
 Modele publiczne udostępniane są w serwisie https://universe.roboflow.com
 
 Parametry dotyczące Roboflow wykorzystywane są dopiero w module analizy obrazu
@@ -92,7 +92,7 @@ Po uzupełnieniu konfiguracji należy wykonać synchronizację projektu
 
 W projekcie zastosowano podział warstwowy, oddzielający dostęp do danych od logiki
 prezentacji. Stan ekranu opisany jest typem zamkniętym (`sealed interface`), co pozwala
-obsłużyć wszystkie warianty — ładowanie, powodzenie i błąd — w sposób kompletny
+obsłużyć wszystkie warianty - ładowanie, powodzenie i błąd - w sposób kompletny
 i sprawdzany na etapie kompilacji.
 
 ```
@@ -130,5 +130,5 @@ Kotlin Coroutines i StateFlow, Navigation Component, CameraX.
 
 ## Źródła danych
 
-- [Rebrickable API](https://rebrickable.com/api/v3/docs/) — katalog zestawów i elementów LEGO
-- [Roboflow Serverless API](https://docs.roboflow.com/guides/run-model-serverless-api) — detekcja obiektów w chmurze
+- [Rebrickable API](https://rebrickable.com/api/v3/docs/) - katalog zestawów i elementów LEGO
+- [Roboflow Serverless API](https://docs.roboflow.com/guides/run-model-serverless-api) - detekcja obiektów w chmurze
