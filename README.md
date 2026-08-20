@@ -85,8 +85,8 @@ Po uzupełnieniu konfiguracji należy wykonać synchronizację projektu
 | `SDK location not found` | Brak pliku `local.properties` lub nieprawidłowa wartość `sdk.dir` |
 | `Gradle JVM version is incompatible` | Wersja JDK spoza zakresu obsługiwanego przez Gradle 8.13 |
 | `index.lock: File exists` | Przerwana operacja Git; wymagane usunięcie pliku `.git/index.lock` |
-| Komunikat „Błędny klucz API" | Brak wartości `REBRICKABLE_API_KEY` lub pominięta synchronizacja projektu |
-| Komunikat „Nie znaleziono zestawu" | Numer zestawu podany bez sufiksu wersji, np. `30510` zamiast `30510-1` |
+| `Komunikat „Błędny klucz API"` | Brak wartości `REBRICKABLE_API_KEY` lub pominięta synchronizacja projektu |
+| `Komunikat „Nie znaleziono zestawu"` | Numer zestawu podany bez sufiksu wersji, np. `30510` zamiast `30510-1` |
 
 ## Architektura
 
