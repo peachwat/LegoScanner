@@ -50,13 +50,30 @@
     </LinearLayout>
 
     <TextView
+            android:id="@+id/partMinus"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:gravity="center"
+            android:text="@string/decrement"
+            android:textSize="20sp"/>
+
+    <TextView
             android:id="@+id/partCounter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:gravity="end"
-            android:minWidth="48dp"
+            android:gravity="center"
+            android:minWidth="52dp"
             android:textSize="16sp"
             android:textStyle="bold"/>
+
+    <TextView
+            android:id="@+id/partPlus"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:gravity="center"
+            android:text="@string/increment"
+            android:textSize="20sp"/>
 
 </LinearLayout>

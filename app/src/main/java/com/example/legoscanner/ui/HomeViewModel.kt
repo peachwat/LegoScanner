@@ -7,6 +7,7 @@ import com.example.legoscanner.data.InvalidApiKeyException
 import com.example.legoscanner.data.NoNetworkException
 import com.example.legoscanner.data.PartRow
 import com.example.legoscanner.data.PartsRepository
+import com.example.legoscanner.data.ProgressStore
 import com.example.legoscanner.data.RateLimitException
 import com.example.legoscanner.data.SetNotFoundException
 import com.example.legoscanner.data.SetStore
@@ -32,8 +33,9 @@ enum class ErrorReason {
 
 class HomeViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val repository = PartsRepository()
+    private val progressStore = ProgressStore(application)
     private val setStore = SetStore(application)
+    private val repository = PartsRepository(progressStore = progressStore)
 
     private val _uiState = MutableStateFlow<HomeUiState>(HomeUiState.Loading(setStore.setNum))
     val uiState: StateFlow<HomeUiState> = _uiState.asStateFlow()
@@ -51,7 +53,24 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
         load(setNum)
     }
 
-    fun retry() = load(setStore.setNum)
+    fun refreshProgress() {
+        val current = _uiState.value as? HomeUiState.Success ?: return
+        _uiState.value = current.copy(
+            parts = repository.applyProgress(current.setNum, current.parts)
+        )
+    }
+
+    fun adjust(part: PartRow, delta: Int) {
+        val current = _uiState.value as? HomeUiState.Success ?: return
+        progressStore.add(current.setNum, part.key, delta, part.required)
+        refreshProgress()
+    }
+
+    fun resetProgress() {
+        val current = _uiState.value as? HomeUiState.Success ?: return
+        progressStore.clear(current.setNum)
+        refreshProgress()
+    }
 
     private fun load(setNum: String) {
         _uiState.value = HomeUiState.Loading(setNum)
@@ -64,15 +83,15 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
                 } else {
                     HomeUiState.Success(setNum, parts)
                 }
-            } catch (e: InvalidApiKeyException) {
+            } catch (_: InvalidApiKeyException) {
                 HomeUiState.Error(setNum, ErrorReason.INVALID_KEY)
-            } catch (e: SetNotFoundException) {
+            } catch (_: SetNotFoundException) {
                 HomeUiState.Error(setNum, ErrorReason.SET_NOT_FOUND)
-            } catch (e: RateLimitException) {
+            } catch (_: RateLimitException) {
                 HomeUiState.Error(setNum, ErrorReason.RATE_LIMIT)
-            } catch (e: NoNetworkException) {
+            } catch (_: NoNetworkException) {
                 HomeUiState.Error(setNum, ErrorReason.NO_NETWORK)
-            } catch (e: Exception) {
+            } catch (_: Exception) {
                 HomeUiState.Error(setNum, ErrorReason.UNKNOWN)
             }
         }

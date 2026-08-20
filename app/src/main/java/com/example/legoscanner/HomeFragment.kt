@@ -1,15 +1,14 @@
 package com.example.legoscanner
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -28,7 +27,8 @@ import kotlinx.coroutines.launch
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private val viewModel: HomeViewModel by viewModels()
-    private val adapter = PartsAdapter()
+
+    private val adapter = PartsAdapter { part, delta -> viewModel.adjust(part, delta) }
 
     private lateinit var partsList: RecyclerView
     private lateinit var progress: ProgressBar
@@ -37,6 +37,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private lateinit var setSubtitle: TextView
     private lateinit var setInput: EditText
     private lateinit var loadButton: Button
+    private lateinit var resetButton: Button
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -44,6 +45,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         setupList()
         setupInput()
         observeState()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.refreshProgress()
     }
 
     private fun bindViews(view: View) {
@@ -54,6 +60,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         setSubtitle = view.findViewById(R.id.setSubtitle)
         setInput = view.findViewById(R.id.setInput)
         loadButton = view.findViewById(R.id.loadButton)
+        resetButton = view.findViewById(R.id.resetButton)
     }
 
     private fun setupList() {
@@ -68,6 +75,15 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         setInput.setText(viewModel.currentSetNum)
 
         loadButton.setOnClickListener { submitSetNumber() }
+
+        resetButton.setOnClickListener {
+            AlertDialog.Builder(requireContext())
+                .setTitle(R.string.reset_confirm_title)
+                .setMessage(R.string.reset_confirm_message)
+                .setPositiveButton(android.R.string.ok) { _, _ -> viewModel.resetProgress() }
+                .setNegativeButton(android.R.string.cancel, null)
+                .show()
+        }
 
         setInput.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {

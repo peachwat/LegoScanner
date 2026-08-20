@@ -31,11 +31,13 @@ data class PartColor(
 data class PartRow(
     val partNum: String,
     val name: String,
+    val colorId: Int,
     val colorName: String,
     val colorRgb: String?,
     val imgUrl: String?,
     val required: Int,
     val found: Int = 0
 ) {
+    val key: String get() = "$partNum|$colorId"
     val isComplete: Boolean get() = found >= required
 }

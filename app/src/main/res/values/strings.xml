@@ -5,12 +5,19 @@
     <string name="home_subtitle">Sprawdź kompletność swojego zestawu</string>
     <string name="set_input_hint">Numer zestawu, np. 30510-1</string>
     <string name="load_button">Załaduj</string>
+    <string name="reset_button">Wyzeruj</string>
+    <string name="reset_confirm_title">Wyzerować postęp?</string>
+    <string name="reset_confirm_message">Wszystkie liczniki dla tego zestawu wrócą do zera.</string>
 
     <string name="set_title_format">Zestaw %1$s</string>
     <string name="loading_parts">Ładowanie listy elementów…</string>
     <string name="summary_format">%1$d typów · %2$d pozycji · %3$d elementów</string>
     <string name="part_meta_format">%1$s · %2$s</string>
     <string name="part_counter_format">%1$d/%2$d</string>
+    <string name="decrement">−</string>
+    <string name="increment">+</string>
+    <string name="decrement_description">Zmniejsz licznik</string>
+    <string name="increment_description">Zwiększ licznik</string>
 
     <string name="error_header">Nie udało się wczytać zestawu</string>
     <string name="error_invalid_key">Błędny klucz API.\n\nDodaj REBRICKABLE_API_KEY do pliku local.properties i zsynchronizuj projekt.</string>
@@ -21,4 +28,50 @@
     <string name="error_unknown">Wystąpił nieoczekiwany błąd.</string>
 
     <string name="part_image_description">Zdjęcie elementu</string>
+
+    <string name="history_title">Historia skanowań</string>
+    <string name="history_empty">Brak historii skanowania</string>
+    <string name="history_export">Eksportuj do CSV</string>
+    <string name="history_clear">Wyczyść</string>
+    <string name="history_clear_title">Wyczyścić historię?</string>
+    <string name="history_clear_message">Wszystkie zapisane skanowania zostaną usunięte. Tych danych nie da się odzyskać.</string>
+    <string name="history_summary_format">%1$d skanowań · %2$d wykryć · %3$d zaliczonych · błędy modelu %4$d (%5$d%%) · średnia pewność %6$d%%</string>
+    <string name="history_record_summary">Wykryto %1$d · zaliczono %2$d · czeka %3$d · średnio %4$d%%</string>
+    <string name="history_record_errors">Błędy modelu: %1$d · spoza zestawu: %2$d</string>
+    <string name="history_export_title">Eksport historii</string>
+    <string name="history_export_failed">Nie udało się wyeksportować pliku</string>
+    <string name="history_details_title">Skanowanie %1$s</string>
+
+    <string name="camera_hint">Ułóż elementy na jednolitym tle, w równym świetle</string>
+    <string name="camera_capture">Zrób zdjęcie</string>
+    <string name="camera_pick_from_gallery">Z galerii</string>
+    <string name="camera_pick_failed">Nie udało się odczytać wybranego obrazu</string>
+    <string name="scan_again">Skanuj ponownie</string>
+    <string name="percent_format">%1$d%%</string>
+    <string name="confidence_certain">pewne</string>
+    <string name="confidence_review">do sprawdzenia</string>
+    <string name="confidence_low">niepewne</string>
+    <string name="result_nothing">Nie rozpoznano żadnego elementu z tego zestawu.</string>
+    <string name="scan_photo_description">Zdjęcie z zaznaczonymi elementami</string>
+    <string name="review_confirm">Tak, to ten klocek</string>
+    <string name="review_correct">Nie, popraw ręcznie</string>
+    <string name="review_pick_title">Wybierz właściwy element</string>
+    <string name="status_auto_accepted">zaliczone automatycznie</string>
+    <string name="status_needs_review">wymaga weryfikacji</string>
+    <string name="status_confirmed">potwierdzone ręcznie</string>
+    <string name="status_corrected">poprawione ręcznie</string>
+    <string name="status_dismissed">odrzucone</string>
+    <string name="color_ambiguous">kolor niepewny</string>
+    <string name="detection_full_meta">%1$s · %2$s · %3$s</string>
+    <string name="result_summary_format">Zaliczono %1$d · do sprawdzenia %2$d · odrzucono %3$d</string>
+    <string name="pick_part_format">%1$s — %2$s (%3$d/%4$d)</string>
+    <string name="camera_analyzing">Analizuję zdjęcie…</string>
+    <string name="camera_capture_failed">Nie udało się zrobić zdjęcia</string>
+    <string name="camera_permission_rationale">Aplikacja potrzebuje dostępu do aparatu, aby rozpoznawać elementy zestawu.</string>
+    <string name="camera_permission_grant">Zezwól na dostęp</string>
+
+    <string name="scan_error_not_configured">Brak konfiguracji Roboflow.\n\nUzupełnij ROBOFLOW_API_KEY i ROBOFLOW_MODEL_ID w pliku local.properties, a następnie zsynchronizuj projekt.</string>
+    <string name="scan_error_no_network">Brak połączenia z internetem.</string>
+    <string name="scan_error_server">Usługa rozpoznawania zwróciła błąd %1$d.</string>
+    <string name="scan_error_unknown">Nie udało się przeanalizować zdjęcia.</string>
 </resources>

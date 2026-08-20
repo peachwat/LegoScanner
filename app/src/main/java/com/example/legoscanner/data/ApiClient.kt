@@ -11,7 +11,12 @@ import java.util.concurrent.TimeUnit
 object ApiClient {
 
     private const val REBRICKABLE_BASE_URL = "https://rebrickable.com/api/v3/"
-    private const val TIMEOUT_SECONDS = 30L
+    private const val ROBOFLOW_BASE_URL = "https://serverless.roboflow.com/"
+    private const val TIMEOUT_SECONDS = 45L
+
+    private val logging = HttpLoggingInterceptor().apply {
+        level = HttpLoggingInterceptor.Level.BASIC
+    }
 
     private val rebrickableAuth = Interceptor { chain ->
         val request = chain.request().newBuilder()
@@ -21,21 +26,26 @@ object ApiClient {
         chain.proceed(request)
     }
 
-    private val logging = HttpLoggingInterceptor().apply {
-        level = HttpLoggingInterceptor.Level.BASIC
-    }
-
-    private val rebrickableClient = OkHttpClient.Builder()
-        .addInterceptor(rebrickableAuth)
-        .addInterceptor(logging)
-        .connectTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
-        .readTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
-        .build()
+    private fun httpClient(vararg interceptors: Interceptor): OkHttpClient =
+        OkHttpClient.Builder()
+            .apply { interceptors.forEach { addInterceptor(it) } }
+            .addInterceptor(logging)
+            .connectTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
+            .readTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
+            .writeTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
+            .build()
 
     val rebrickable: RebrickableApi = Retrofit.Builder()
         .baseUrl(REBRICKABLE_BASE_URL)
-        .client(rebrickableClient)
+        .client(httpClient(rebrickableAuth))
         .addConverterFactory(GsonConverterFactory.create())
         .build()
         .create(RebrickableApi::class.java)
+
+    val roboflow: RoboflowApi = Retrofit.Builder()
+        .baseUrl(ROBOFLOW_BASE_URL)
+        .client(httpClient())
+        .addConverterFactory(GsonConverterFactory.create())
+        .build()
+        .create(RoboflowApi::class.java)
 }
