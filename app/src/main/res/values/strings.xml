@@ -1,3 +1,24 @@
 <resources>
     <string name="app_name">LegoScanner</string>
+
+    <string name="home_title">LEGO Scanner</string>
+    <string name="home_subtitle">Sprawdź kompletność swojego zestawu</string>
+    <string name="set_input_hint">Numer zestawu, np. 30510-1</string>
+    <string name="load_button">Załaduj</string>
+
+    <string name="set_title_format">Zestaw %1$s</string>
+    <string name="loading_parts">Ładowanie listy elementów…</string>
+    <string name="summary_format">%1$d typów · %2$d pozycji · %3$d elementów</string>
+    <string name="part_meta_format">%1$s · %2$s</string>
+    <string name="part_counter_format">%1$d/%2$d</string>
+
+    <string name="error_header">Nie udało się wczytać zestawu</string>
+    <string name="error_invalid_key">Błędny klucz API.\n\nDodaj REBRICKABLE_API_KEY do pliku local.properties i zsynchronizuj projekt.</string>
+    <string name="error_set_not_found">Nie znaleziono zestawu %1$s.\n\nNumer musi mieć sufiks wersji, np. 30510-1</string>
+    <string name="error_rate_limit">Za dużo zapytań. Poczekaj chwilę i spróbuj ponownie.</string>
+    <string name="error_no_network">Brak połączenia z internetem.\n\nSprawdź sieć i spróbuj ponownie.</string>
+    <string name="error_empty_inventory">Zestaw %1$s nie ma listy elementów w bazie Rebrickable.</string>
+    <string name="error_unknown">Wystąpił nieoczekiwany błąd.</string>
+
+    <string name="part_image_description">Zdjęcie elementu</string>
 </resources>
